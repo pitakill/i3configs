@@ -112,9 +112,9 @@ bindsym $mod+Shift+v exec --no-startup-id VirtualBox --comment windows 7 x64 --s
 
 #Control when shows apps
 bindsym Control+less [title="scratchpad" class="Xfce4-terminal"] scratchpad show
-bindsym $mod+x [class="Pidgin" window_role="conversation"] scratchpad show
-#bindsym $mod+x [instance="crx_nckg.*" class="Chromium-browser"] scratchpad show
-#bindsym $mod+Shift+x [class="Chromium-browser" window_role="pop-up"] scratchpad show
+#bindsym $mod+x [class="Pidgin" window_role="conversation"] scratchpad show
+bindsym $mod+x [instance="crx_nckg.*" class="Chromium-browser"] scratchpad show
+bindsym $mod+Shift+x [class="Chromium-browser" window_role="pop-up"] scratchpad show
 
 mode "resizeMode" {
   bindsym j resize shrink width 10 px or 10 ppt
@@ -215,4 +215,4 @@ for_window [class="Pidgin"] floating enable
 #Execute the last configuration for a very nice desktop :P
 exec --no-startup-id ~/.i3/HDMI_main.sh &
 exec --no-startup-id xcompmgr -cCfF -r7 -o 0.65 -l-10 -t-8 -D7 -I 0.04 -O 0.04 &
-exec --no-startup-id pidgin &
+#exec --no-startup-id pidgin &
