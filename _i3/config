@@ -6,7 +6,8 @@ hide_edge_borders none
 workspace_auto_back_and_forth no
 workspace_layout tabbed
 
-bindsym $mod+Return exec --no-startup-id i3-sensible-terminal &
+#bindsym $mod+Return exec --no-startup-id i3-sensible-terminal &
+bindsym $mod+Return exec --no-startup-id xfce4-terminal &
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id dmenu_run &
 bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop &
@@ -100,7 +101,7 @@ bindsym $mod+Menu+Escape+Shift exec sudo systemctl hibernate
 #Custom keys for excecute apps
 bindsym Control+Shift+less exec --no-startup-id xfce4-terminal --title=scratchpad -x screen -dR &
 bindsym $mod+b exec --no-startup-id chromium-browser &
-bindsym $mod+Shift+b exec chromium-browser --profile-directory="Profile 3" &
+bindsym $mod+Shift+b exec chromium-browser --profile-directory="Profile 1" &
 bindsym $mod+Control+Shift+b exec midori &
 bindsym Print exec --no-startup-id scrot '%Y-%m-%d_%H%M%S.png' -e 'mv $f ~/Pictures/Screenshots/'
 bindsym Shift+Print exec --no-startup-id xfce4-screenshooter
@@ -108,7 +109,7 @@ bindsym XF86Calculator exec --no-startup-id xcalc &
 bindsym XF86Sleep exec --no-startup-id sudo systemctl suspend
 bindsym $mod+XF86Sleep exec --no-startup-id sudo systemctl hibernate
 bindsym $mod+g exec --no-startup-id gvim
-bindsym $mod+Shift+v exec --no-startup-id VirtualBox --comment windows 7 x64 --startvm f115f11d-868d-4869-84c6-f577d5fb62de
+bindsym $mod+Shift+v exec --no-startup-id VirtualBox --comment windows 7 x64 --startvm 4292b075-e6b5-4cb9-b275-780904a11b33
 
 #Control when shows apps
 bindsym Control+less [title="scratchpad" class="Xfce4-terminal"] scratchpad show
@@ -216,3 +217,4 @@ for_window [class="Pidgin"] floating enable
 exec --no-startup-id ~/.i3/HDMI_main.sh &
 exec --no-startup-id xcompmgr -cCfF -r7 -o 0.65 -l-10 -t-8 -D7 -I 0.04 -O 0.04 &
 #exec --no-startup-id pidgin &
+exec --no-startup-id numlockx &
