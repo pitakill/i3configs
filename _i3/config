@@ -100,8 +100,8 @@ bindsym $mod+Menu+Escape+Shift exec sudo systemctl hibernate
 
 #Custom keys for excecute apps
 bindsym Control+Shift+less exec --no-startup-id xfce4-terminal --title=scratchpad -x screen -dR &
-bindsym $mod+b exec --no-startup-id chromium-browser &
-bindsym $mod+Shift+b exec chromium-browser --profile-directory="Profile 1" &
+bindsym $mod+b exec --no-startup-id google-chrome-stable &
+bindsym $mod+Shift+b exec google-chrome-stable --profile-directory="Profile 1" &
 bindsym $mod+Control+Shift+b exec midori &
 bindsym Print exec --no-startup-id scrot '%Y-%m-%d_%H%M%S.png' -e 'mv $f ~/Pictures/Screenshots/'
 bindsym Shift+Print exec --no-startup-id xfce4-screenshooter
@@ -114,8 +114,8 @@ bindsym $mod+Shift+v exec --no-startup-id VirtualBox --comment windows 7 x64 --s
 #Control when shows apps
 bindsym Control+less [title="scratchpad" class="Xfce4-terminal"] scratchpad show
 #bindsym $mod+x [class="Pidgin" window_role="conversation"] scratchpad show
-bindsym $mod+x [instance="crx_nckg.*" class="Chromium-browser"] scratchpad show
-bindsym $mod+Shift+x [class="Chromium-browser" window_role="pop-up"] scratchpad show
+bindsym $mod+x [instance="crx_nckg.*" class="google-chrome"] scratchpad show
+bindsym $mod+Shift+x [class="google-chrome" window_role="pop-up"] scratchpad show
 
 mode "resizeMode" {
   bindsym j resize shrink width 10 px or 10 ppt
@@ -192,20 +192,21 @@ exec --no-startup-id xbacklight -set 10 &
 #exec i3-msg workspace 1:chat &
 
 #Where apps displays
-assign [instance="crx_nckg.*" class="Chromium-browser"] 1:chat
+assign [instance="crx_nckg.*" class="google-chrome"] 1:chat
 assign [class="Pidgin"] 1:chat
 assign [class="VirtualBox"] 2:vb
-assign [class="Chromium-browser" window_role="browser"] 4:www
+assign [class="google-chrome" window_role="browser"] 4:www
 assign [class="Thunderbird"] 6:mail
 assign [class="libreoffice"] 7:office
 
 #Borders and other stuff
-for_window [class="Chromium-browser" window_role="browser"] border normal 0pixel
+for_window [class="google-chrome" window_role="browser"] border normal 0pixel
 
 
 #where apps move/show when are created
-for_window [title="scratchpad" class="Xfce4-terminal"] move to scratchpad; [title="scratchpad" class="Xfce4-terminal"] scratchpad show; move position 3px 22px; resize grow height 170px; resize grow width 1362px; move scratchpad
-for_window [class="Chromium-browser" instance="crx_nckg.*"] floating enable
+#for_window [title="scratchpad" class="Xfce4-terminal"] move to scratchpad; [title="scratchpad" class="Xfce4-terminal"] scratchpad show; move position 3px 22px; resize set height 1056px; resize set width 1914px; move scratchpad
+for_window [title="scratchpad" class="Xfce4-terminal"] move to scratchpad; [title="scratchpad" class="Xfce4-terminal"] scratchpad show; move position 3px 22px; resize set 1914 1056
+for_window [class="google-chrome" instance="crx_nckg.*"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="app"] floating enable
