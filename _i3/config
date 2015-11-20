@@ -1,6 +1,6 @@
 # i3 Configuration file.
 set $mod Mod1
-font pango:DejaVu Sans Mono 8
+font pango:Source Code Pro 8
 floating_modifier $mod
 hide_edge_borders none
 workspace_auto_back_and_forth no
@@ -100,8 +100,8 @@ bindsym $mod+Menu+Escape+Shift exec sudo systemctl hibernate
 
 #Custom keys for excecute apps
 bindsym Control+Shift+less exec --no-startup-id xfce4-terminal --title=scratchpad -x screen -dR &
-bindsym $mod+b exec --no-startup-id google-chrome-stable &
-bindsym $mod+Shift+b exec google-chrome-stable --profile-directory="Profile 1" &
+bindsym $mod+b exec google-chrome-stable --profile-directory="Default" &
+bindsym $mod+Shift+b exec google-chrome-stable --profile-directory="Profile 2" &
 bindsym $mod+Control+Shift+b exec midori &
 bindsym Print exec --no-startup-id scrot '%Y-%m-%d_%H%M%S.png' -e 'mv $f ~/Pictures/Screenshots/'
 bindsym Shift+Print exec --no-startup-id xfce4-screenshooter
@@ -186,7 +186,7 @@ workspace 6:mail output eDP1
 #workspace 8 output eDP1
 
 #Custom apps
-exec_always --no-startup-id setxkbmap -layout latam,es -option 'grp:ctrl_alt_toggle'
+exec_always --no-startup-id setxkbmap -layout es,latam -option 'grp:ctrl_alt_toggle'
 exec --no-startup-id xset -b &
 exec --no-startup-id xbacklight -set 10 &
 #exec i3-msg workspace 1:chat &
@@ -205,7 +205,7 @@ for_window [class="google-chrome" window_role="browser"] border normal 0pixel
 
 #where apps move/show when are created
 #for_window [title="scratchpad" class="Xfce4-terminal"] move to scratchpad; [title="scratchpad" class="Xfce4-terminal"] scratchpad show; move position 3px 22px; resize set height 1056px; resize set width 1914px; move scratchpad
-for_window [title="scratchpad" class="Xfce4-terminal"] move to scratchpad; [title="scratchpad" class="Xfce4-terminal"] scratchpad show; move position 3px 22px; resize set 1914 1056
+for_window [title="scratchpad" class="Xfce4-terminal"] move to scratchpad; [title="scratchpad" class="Xfce4-terminal"] scratchpad show; move position 3px 22px; resize set 1914 1057
 for_window [class="google-chrome" instance="crx_nckg.*"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
@@ -215,6 +215,8 @@ for_window [class="XCalc"] floating enable
 for_window [class="Pidgin"] floating enable
 
 #Execute the last configuration for a very nice desktop :P
+exec --no-startup-id devmon &
+exec --no-startup-id feh --bg-scale ~/.i3/backgrounds/halo5.jpg &
 exec --no-startup-id ~/.i3/HDMI_main.sh &
 exec --no-startup-id xcompmgr -cCfF -r7 -o 0.65 -l-10 -t-8 -D7 -I 0.04 -O 0.04 &
 #exec --no-startup-id pidgin &
