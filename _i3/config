@@ -1,6 +1,8 @@
 # i3 Configuration file.
-set $mod Mod1
-font pango:Source Code Pro 8
+set $mod Mod4
+set $main_display HDMI3
+set $second_display HDMI1
+font pango:Source Code Pro 9
 floating_modifier $mod
 hide_edge_borders none
 workspace_auto_back_and_forth no
@@ -40,15 +42,16 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
+bindsym Control+Shift+1 [class="^.*"] border toggle
 
 #Move to Workspaces
 bindsym $mod+1 workspace 1:chat
 bindsym $mod+2 workspace 2:vb
 bindsym $mod+3 workspace 3:dev
 bindsym $mod+4 workspace 4:www
-bindsym $mod+5 workspace 5:devB
-bindsym $mod+6 workspace 6:mail
-bindsym $mod+7 workspace 7:office
+bindsym $mod+5 workspace 5:devBrowser
+bindsym $mod+6 workspace 6:devTools
+bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
@@ -58,9 +61,9 @@ bindsym $mod+Shift+1 move container to workspace 1:chat
 bindsym $mod+Shift+2 move container to workspace 2:vb
 bindsym $mod+Shift+3 move container to workspace 3:dev
 bindsym $mod+Shift+4 move container to workspace 4:www
-bindsym $mod+Shift+5 move container to workspace 5:devB
-bindsym $mod+Shift+6 move container to workspace 6:mail
-bindsym $mod+Shift+7 move container to workspace 7:office
+bindsym $mod+Shift+5 move container to workspace 5:devBrowser
+bindsym $mod+Shift+6 move container to workspace 6:devTools
+bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
@@ -87,8 +90,8 @@ bindsym Control+Shift+XF86MonBrightnessDown exec --no-startup-id xbacklight -set
 bindsym Control+XF86MonBrightnessUp exec --no-startup-id xbacklight -set 100 &
 bindsym $mod+Menu exec --no-startup-id ~/.i3/HDMI_main.sh &
 bindsym $mod+Shift+Menu exec --no-startup-id ~/.i3/HDMI_alone.sh &
-bindsym $mod+m move workspace to output HDMI1
-bindsym $mod+Shift+m move workspace to output eDP1
+bindsym $mod+m move workspace to output $main_display
+bindsym $mod+Shift+m move workspace to output $second_display
 
 #
 bindsym $mod+Shift+minus move scratchpad
@@ -105,11 +108,14 @@ bindsym $mod+Shift+b exec google-chrome-stable --profile-directory="Profile 2" &
 bindsym $mod+Control+Shift+b exec midori &
 bindsym Print exec --no-startup-id scrot '%Y-%m-%d_%H%M%S.png' -e 'mv $f ~/Pictures/Screenshots/'
 bindsym Shift+Print exec --no-startup-id xfce4-screenshooter
-bindsym XF86Calculator exec --no-startup-id xcalc &
+bindsym $mod+Shift+s exec --no-startup-id xfce4-screenshooter
+bindsym XF86Calculator exec --no-startup-id galculator &
 bindsym XF86Sleep exec --no-startup-id sudo systemctl suspend
-bindsym $mod+XF86Sleep exec --no-startup-id sudo systemctl hibernate
+#bindsym $mod+XF86Sleep exec --no-startup-id sudo systemctl hibernate
+bindsym $mod+XF86Sleep exec --no-startup-id sudo /home/pitakill/.i3/before_hibernate.sh;sudo systemctl hibernate
 bindsym $mod+g exec --no-startup-id gvim
-bindsym $mod+Shift+v exec --no-startup-id VirtualBox --comment windows 7 x64 --startvm 4292b075-e6b5-4cb9-b275-780904a11b33
+bindsym $mod+Shift+v exec --no-startup-id VirtualBox --comment Windows 7 --startvm 52b0fbf9-c4f7-46f7-a9fa-f01736c22a3c --no-startvm-errormsgbox
+
 
 #Control when shows apps
 bindsym Control+less [title="scratchpad" class="Xfce4-terminal"] scratchpad show
@@ -176,19 +182,17 @@ bar {
  }
 }
 
-workspace 1:chat output eDP1
-workspace 2:vb output HDMI1
-workspace 3:dev output eDP1
-workspace 4:www output HDMI1
-workspace 5:devB output HDMI1
-workspace 6:mail output eDP1
-#workspace 7 output HDMI1
-#workspace 8 output eDP1
+workspace 1:chat output $second_display
+workspace 2:vb output $main_display
+workspace 3:dev output $second_display
+workspace 4:www output $second_display
+workspace 5:devBrowser output $main_display
+workspace 6:devTools output $second_display
 
 #Custom apps
 exec_always --no-startup-id setxkbmap -layout es,latam -option 'grp:ctrl_alt_toggle'
-exec --no-startup-id xset -b &
-exec --no-startup-id xbacklight -set 10 &
+#exec --no-startup-id xset -b &
+#exec --no-startup-id xbacklight -set 10 &
 #exec i3-msg workspace 1:chat &
 
 #Where apps displays
@@ -205,20 +209,21 @@ for_window [class="google-chrome" window_role="browser"] border normal 0pixel
 
 #where apps move/show when are created
 #for_window [title="scratchpad" class="Xfce4-terminal"] move to scratchpad; [title="scratchpad" class="Xfce4-terminal"] scratchpad show; move position 3px 22px; resize set height 1056px; resize set width 1914px; move scratchpad
-for_window [title="scratchpad" class="Xfce4-terminal"] move to scratchpad; [title="scratchpad" class="Xfce4-terminal"] scratchpad show; move position 3px 22px; resize set 1914 1057
+for_window [title="scratchpad" class="Xfce4-terminal"] move to scratchpad; [title="scratchpad" class="Xfce4-terminal"] scratchpad show; move position 3px 21px; resize set 1914 1058
 for_window [class="google-chrome" instance="crx_nckg.*"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="app"] floating enable
 for_window [title="^Task"] floating enable
 for_window [class="XCalc"] floating enable
+for_window [class="(?i)galculator"] floating enable
 for_window [class="Pidgin"] floating enable
 
 #Execute the last configuration for a very nice desktop :P
-exec --no-startup-id devmon &
-exec --no-startup-id feh --bg-scale ~/.i3/backgrounds/halo5.jpg &
+#exec --no-startup-id devmon &
+#exec --no-startup-id feh --bg-scale --recursive --randomize ~/.i3/backgrounds/ &
 exec --no-startup-id ~/.i3/HDMI_main.sh &
-exec --no-startup-id xcompmgr -cCfF -r7 -o 0.65 -l-10 -t-8 -D7 -I 0.04 -O 0.04 &
+#exec --no-startup-id xcompmgr -cCfF -r7 -o 0.65 -l-10 -t-8 -D7 -I 0.04 -O 0.04 &
 #exec --no-startup-id pidgin &
 exec --no-startup-id numlockx &
 exec --no-startup-id xmodmap -e "pointer = 1 2 3 5 4" &
