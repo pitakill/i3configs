@@ -46,10 +46,10 @@ bindsym Control+Shift+1 [class="^.*"] border toggle
 
 #Move to Workspaces
 bindsym $mod+1 workspace 1:chat
-bindsym $mod+2 workspace 2:vb
+bindsym $mod+2 workspace 2:devBrowser
 bindsym $mod+3 workspace 3:dev
 bindsym $mod+4 workspace 4:www
-bindsym $mod+5 workspace 5:devBrowser
+bindsym $mod+5 workspace 5:vb
 bindsym $mod+6 workspace 6:devTools
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
@@ -58,10 +58,10 @@ bindsym $mod+0 workspace 10
 
 #Move app to Workspace
 bindsym $mod+Shift+1 move container to workspace 1:chat
-bindsym $mod+Shift+2 move container to workspace 2:vb
+bindsym $mod+Shift+2 move container to workspace 2:devBrowser
 bindsym $mod+Shift+3 move container to workspace 3:dev
 bindsym $mod+Shift+4 move container to workspace 4:www
-bindsym $mod+Shift+5 move container to workspace 5:devBrowser
+bindsym $mod+Shift+5 move container to workspace 5:vb
 bindsym $mod+Shift+6 move container to workspace 6:devTools
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
@@ -183,10 +183,10 @@ bar {
 }
 
 workspace 1:chat output $second_display
-workspace 2:vb output $main_display
+workspace 2:devBrowser output $main_display
 workspace 3:dev output $second_display
 workspace 4:www output $second_display
-workspace 5:devBrowser output $main_display
+workspace 5:vb output $main_display
 workspace 6:devTools output $second_display
 
 #Custom apps
