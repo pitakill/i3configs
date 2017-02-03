@@ -1,0 +1,8 @@
+/*xrandr --dpi 80*/
+xinput set-prop 12 "Evdev Scrolling Distance" -1 1 1
+setxkbmap -layout es,latam -option 'gpr:lctrl_lwin_rctrl_menu'
+xrandr --output HDMI3 --auto --primary --left-of HDMI1
+numlockx
+~/.i3/background.sh
+~/.i3/xmodmap.sh
+exec i3
