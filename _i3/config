@@ -1,4 +1,3 @@
-#
 # i3 Configuration file.
 set $mod Mod4
 set $main_display HDMI3 #Samsung HDMI1
@@ -209,6 +208,7 @@ for_window [title="^Task"] floating enable
 for_window [class="XCalc"] floating enable
 for_window [class="(?i)galculator"] floating enable
 for_window [class="Pidgin"] floating enable
+for_window [class="Simplescreenrecorder"] floating enable
 
 #Execute the last configuration for a very nice desktop :P
 exec --no-startup-id ~/.i3/HDMI_main.sh
