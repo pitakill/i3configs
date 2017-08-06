@@ -1,40 +1,34 @@
 # i3 Configuration file.
+
+# setting vars
 set $mod Mod4
-set $main_display HDMI3
-set $second_display HDMI1
-font pango:Source Code Pro 9
+set $main_display HDMI1
+set $second_display LVDS1
+
+# default values
+font pango:Go Mono 8
 floating_modifier $mod
 hide_edge_borders none
 workspace_auto_back_and_forth no
 workspace_layout tabbed
 
-#bindsym $mod+Return exec --no-startup-id i3-sensible-terminal &
-bindsym $mod+Return exec --no-startup-id xfce4-terminal &
+# default keyboard shortcuts
+bindsym $mod+Return exec --no-startup-id i3-sensible-terminal &
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id dmenu_run &
 bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop &
 
 #Move
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+ntilde focus right
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+ntilde move right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 #Layouts
-bindsym $mod+h split h
-bindsym $mod+v split v
 bindsym $mod+f fullscreen
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -54,7 +48,7 @@ bindsym $mod+6 workspace 6:devTools
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+0 workspace 10:gpmdp
 
 #Move app to Workspace
 bindsym $mod+Shift+1 move container to workspace 1:chat
@@ -66,7 +60,7 @@ bindsym $mod+Shift+6 move container to workspace 6:devTools
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+0 move container to workspace 10:gpmdp
 
 #Session
 bindsym $mod+r mode "resizeMode"
@@ -76,49 +70,36 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 #Custom keys for controlling hardware
+bindsym XF86TouchpadToggle exec --no-startup-id $HOME/.bin/touchpad &
+bindsym Shift+F1 exec --no-startup-id $HOME/.bin/touchpad &
+bindsym Shift+F8 exec --no-startup-id playerctl play-pause &
+bindsym Shift+F9 exec --no-startup-id playerctl previous &
+bindsym Shift+F10 exec --no-startup-id playerctl next &
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 7%- unmute &
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 7%+ unmute &
 bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle &
-bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xbacklight -inc 7 &
-bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xbacklight -dec  7 &
-bindsym Control+XF86AudioLowerVolume exec --no-startup-id xbacklight -dec 7 &
-bindsym Control+XF86AudioRaiseVolume exec --no-startup-id xbacklight -inc 7 &
-bindsym Control+Shift+XF86AudioLowerVolume exec --no-startup-id xbacklight -set 50 &
-bindsym Control+Shift+XF86AudioRaiseVolume exec --no-startup-id xbacklight -set 100 &
-bindsym Control+XF86MonBrightnessDown exec --no-startup-id xbacklight -set 50 &
-bindsym Control+Shift+XF86MonBrightnessDown exec --no-startup-id xbacklight -set 10 &
-bindsym Control+XF86MonBrightnessUp exec --no-startup-id xbacklight -set 100 &
-bindsym $mod+Menu exec --no-startup-id ~/.i3/HDMI_main.sh &
-bindsym $mod+Shift+Menu exec --no-startup-id ~/.i3/HDMI_alone.sh &
+bindsym XF86Display exec --no-startup-id $HOME/.i3/scripts/set_displays both &
+bindsym Shift+XF86Display exec --no-startup-id $HOME/.i3/scripts/set_displays alone &
+bindsym XF86MonBrightnessUp exec --no-startup-id $HOME/.bin/set_brightness + &
+bindsym XF86MonBrightnessDown exec --no-startup-id $HOME/.bin/set_brightness - &
 bindsym $mod+m move workspace to output $main_display
 bindsym $mod+Shift+m move workspace to output $second_display
 
-#
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show
-bindsym $mod+Tab focus right
-bindsym $mod+Shift+Tab focus left
-bindsym $mod+Escape exec i3-msg workspace 1:chat && i3lock -d -i /home/pitakill/.i3/background-lock.png &
-bindsym $mod+Menu+Escape+Shift exec sudo systemctl hibernate
-
 #Custom keys for excecute apps
-bindsym Control+Shift+less exec --no-startup-id xfce4-terminal --title=scratchpad -x screen -dR &
 bindsym $mod+b exec google-chrome-stable --profile-directory="Default" &
-bindsym $mod+Shift+b exec google-chrome-stable --profile-directory="Profile 2" &
-bindsym $mod+Control+Shift+b exec midori &
-bindsym Print exec --no-startup-id scrot '%Y-%m-%d_%H%M%S.png' -e 'mv $f ~/Pictures/Screenshots/'
-bindsym Shift+Print exec --no-startup-id xfce4-screenshooter
-bindsym $mod+Shift+s exec --no-startup-id xfce4-screenshooter
+bindsym $mod+Shift+b exec google-chrome-stable --profile-directory="Profile 1" &
+bindsym Print exec --no-startup-id xfce4-screenshooter
 bindsym XF86Calculator exec --no-startup-id galculator &
-bindsym XF86Sleep exec --no-startup-id sudo systemctl suspend
+bindsym XF86Sleep exec --no-startup-id systemctl suspend
 #bindsym $mod+XF86Sleep exec --no-startup-id sudo systemctl hibernate
-bindsym $mod+XF86Sleep exec --no-startup-id sudo /home/pitakill/.i3/before_hibernate.sh;sudo systemctl hibernate
+bindsym $mod+z exec --no-startup-id /home/pitakill/.bin/kb_backlight
 bindsym $mod+g exec --no-startup-id gvim
 bindsym $mod+Shift+v exec --no-startup-id VirtualBox --comment Windows 7 --startvm 52b0fbf9-c4f7-46f7-a9fa-f01736c22a3c --no-startvm-errormsgbox
 
 
 #Control when shows apps
-bindsym Control+less [title="scratchpad" class="Xfce4-terminal"] scratchpad show
+#bindsym Control+less [title="scratchpad" class="Xfce4-terminal"] scratchpad show
+#bindsym Control+less exec xfce4-terminal --drop-down &
 #bindsym $mod+x [class="Pidgin" window_role="conversation"] scratchpad show
 bindsym $mod+x [instance="crx_nckg.*" class="google-chrome"] scratchpad show
 bindsym $mod+Shift+x [class="google-chrome" window_role="pop-up"] scratchpad show
@@ -185,12 +166,12 @@ bar {
 workspace 1:chat output $second_display
 workspace 2:devBrowser output $main_display
 workspace 3:dev output $second_display
-workspace 4:www output $second_display
+workspace 4:www output $main_display
 workspace 5:vb output $main_display
 workspace 6:devTools output $second_display
 
 #Custom apps
-exec_always --no-startup-id setxkbmap -layout es,latam -option 'grp:ctrl_alt_toggle'
+exec_always --no-startup-id setxkbmap -layout latam,es -option 'grp:ctrl_alt_toggle'
 #exec --no-startup-id xset -b &
 #exec --no-startup-id xbacklight -set 10 &
 #exec i3-msg workspace 1:chat &
@@ -208,8 +189,6 @@ for_window [class="google-chrome" window_role="browser"] border normal 0pixel
 
 
 #where apps move/show when are created
-#for_window [title="scratchpad" class="Xfce4-terminal"] move to scratchpad; [title="scratchpad" class="Xfce4-terminal"] scratchpad show; move position 3px 22px; resize set height 1056px; resize set width 1914px; move scratchpad
-for_window [title="scratchpad" class="Xfce4-terminal"] move to scratchpad; [title="scratchpad" class="Xfce4-terminal"] scratchpad show; move position 3px 21px; resize set 1914 1058
 for_window [class="google-chrome" instance="crx_nckg.*"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
@@ -220,13 +199,8 @@ for_window [class="(?i)galculator"] floating enable
 for_window [class="Pidgin"] floating enable
 
 #Execute the last configuration for a very nice desktop :P
-#exec --no-startup-id devmon &
-#exec --no-startup-id feh --bg-scale --recursive --randomize ~/.i3/backgrounds/ &
-exec --no-startup-id ~/.i3/HDMI_main.sh &
+exec --no-startup-id $HOME/.i3/scripts/set_displays alone &
+#exec --no-startup-id $HOME/.i3/scripts/xmodmap &
 #exec --no-startup-id xcompmgr -cCfF -r7 -o 0.65 -l-10 -t-8 -D7 -I 0.04 -O 0.04 &
-#exec --no-startup-id pidgin &
+exec --no-startup-id compton &
 exec --no-startup-id numlockx &
-exec --no-startup-id xmodmap -e "pointer = 1 2 3 5 4" &
-exec --no-startup-id synclient TapButton2=3 &
-exec --no-startup-id synclient TapButton1=1 &
-exec --no-startup-id synclient HorizTwoFingerScroll=1 &

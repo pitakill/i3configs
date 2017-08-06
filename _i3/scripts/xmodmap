@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+xmodmap $HOME/Projects/personal/MyDotFiles/_Xmodmap

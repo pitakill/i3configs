@@ -1,0 +1,29 @@
+#!/bin/sh
+
+horizontal=`ls ~/.i3/backgrounds/1920x1080/* | shuf -n 1`
+horizontal_one=`ls ~/.i3/backgrounds/1920x1080/* | shuf -n 1`
+vertical=`ls ~/.i3/backgrounds/1080x1920/* | shuf -n 1`
+vertical_one=`ls ~/.i3/backgrounds/1080x1920/* | shuf -n 1`
+
+if [ $# -eq 1 ]; then
+  case $1 in
+  landscape)
+    feh --bg-scale $horizontal --bg-scale $horizontal_one
+    ;;
+  both)
+    feh --bg-scale $horizontal --bg-scale $vertical
+    ;;
+  portrait)
+    feh --bg-scale $vertical --bg-scale $vertical_one
+    ;;
+  *)
+    echo "i don't recognize the flag :("
+  esac
+else
+  echo "This scripts accepts only one parameter:
+
+landscape: For both displays in landscape
+both: For the main display in landscape and the second in portrait
+portrait: For both displays in portrait
+"
+fi

@@ -1,0 +1,30 @@
+#!/bin/sh
+
+benq="HDMI1"
+sony="LVDS1"
+
+main=$benq
+secondary=$sony
+
+#Determinaremos qué monitores están conectados.
+xrandr | grep -o "HDMI1 connected" 2>&1 >/dev/null
+
+if [ $# -eq 1 ]; then
+  case $1 in
+    alone)
+    xrandr --output $main --auto --off --output $secondary --auto --primary
+    $HOME/.i3/scripts/set_background landscape &
+    ;;
+    both)
+    if [ $? == 0 ]; then
+      xrandr --output $main --auto --primary --above $secondary --output $secondary --auto
+      #feh --bg-fill --randomize --recursive ~/.i3/backgrounds/*
+      #nitrogen --restore &
+      $HOME/.i3/scripts/set_background landscape &
+    fi
+    ;;
+    *)
+    echo "I don't recognize the flag"
+    ;;
+  esac
+fi
