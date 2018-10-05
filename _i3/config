@@ -2,7 +2,7 @@
 set $mod Mod4
 set $main_display HDMI3 #Samsung HDMI1
 set $second_display HDMI2 #Samsung HDMI2
-set $third_display HDMI2 #BenQ
+#set $third_display HDMI2 #BenQ
 #font pango:Source Code Pro 9
 font pango:Go Mono 9
 floating_modifier $mod
@@ -11,7 +11,6 @@ workspace_auto_back_and_forth no
 workspace_layout tabbed
 
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
-#bindsym $mod+Shift+Return exec --no-startup-id terminator -b -T "Terminator-scratchpad" -c "Terminator-scratchpad"
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop
@@ -35,6 +34,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 bindsym Control+Shift+1 [class="^.*"] border toggle
+bindsym $mod+t split toggle
 
 #Move to Workspaces
 bindsym $mod+1 workspace 1:chat
@@ -68,9 +68,10 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 #Custom keys for controlling hardware
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 7%- unmute &
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 7%+ unmute &
-bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle &
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 5 -5% && pactl set-sink-volume 3 -5% &
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 5 +5% && pactl set-sink-volume 3 -5% &
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 3 1 &
+bindsym Shift+XF86AudioMute exec --no-startup-id pactl set-sink-mute 3 0 &
 bindsym XF86MonBrightnessUp exec --no-startup-id /usr/bin/xbacklight -inc 7 &
 bindsym XF86MonBrightnessDown exec --no-startup-id /usr/bin/xbacklight -dec  7 &
 bindsym Control+XF86AudioLowerVolume exec --no-startup-id xbacklight -dec 7 &
@@ -95,7 +96,7 @@ bindsym $mod+Menu+Escape+Shift exec sudo systemctl hibernate
 #bindsym Control+Shift+less exec --no-startup-id xfce4-terminal --title=scratchpad -x screen -dR &
 bindsym Control+Shift+less exec --no-startup-id qterminal --drop &
 bindsym $mod+b exec google-chrome-stable --profile-directory="Default" &
-bindsym $mod+Shift+b exec google-chrome-stable --profile-directory="Profile 2" &
+bindsym $mod+Shift+b exec google-chrome-stable --profile-directory="Profile 5" &
 bindsym $mod+Control+Shift+b exec midori &
 #bindsym Print exec --no-startup-id scrot '%Y-%m-%d_%H%M%S.png' -e 'mv $f ~/Pictures/Screenshots/'
 bindsym Print exec --no-startup-id xfce4-screenshooter
@@ -213,4 +214,4 @@ for_window [class="Simplescreenrecorder"] floating enable
 #Execute the last configuration for a very nice desktop :P
 exec --no-startup-id ~/.i3/HDMI_main.sh
 exec --no-startup-id ~/.i3/xmodmap.sh
-exec --no-startup-id xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 &
+#exec --no-startup-id xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 &

@@ -1,7 +1,6 @@
-/*xrandr --dpi 80*/
-xinput set-prop 14 267 1
+xinput set-prop 19 274 1
 setxkbmap -layout es,latam -option 'gpr:lctrl_lwin_rctrl_menu'
-xrandr --output HDMI3 --auto --primary --left-of HDMI1
+xrandr --output HDMI2 --auto --primary --mode 3840x2160
 numlockx
 ~/.i3/background.sh
 ~/.i3/xmodmap.sh
